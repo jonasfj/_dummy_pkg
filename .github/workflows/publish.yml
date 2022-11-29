@@ -9,7 +9,7 @@ jobs:
   publish:
     permissions:
       id-token: write # This is required for requesting the JWT
-      contents: read # TODO: Figure out if we really need this
+      #contents: read # TODO: Figure out if we really need this
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
