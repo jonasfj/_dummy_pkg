@@ -1,8 +1,9 @@
 name: Publish to pub.dev
 
 on:
-  tags:
-    - v.*
+  push:
+    tags:
+      - v.*
 
 jobs:
   publish:
