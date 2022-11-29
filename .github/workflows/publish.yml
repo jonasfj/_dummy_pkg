@@ -18,4 +18,4 @@ jobs:
       - name: Analyze
         run: dart analyze
       - name: Publish
-        run: dart pub publish
+        run: dart pub publish -f
