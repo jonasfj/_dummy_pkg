@@ -1,4 +1,4 @@
-version: 0.0.225
+version: 0.0.226
 name: _dummy_pkg
 homepage: 'https://github.com/dart-lang/pub-dev'
 description: 'Dummy packages published from pub integration tests.'
