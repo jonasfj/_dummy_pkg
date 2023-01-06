@@ -8,8 +8,13 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   # '204799038523@cloudbuild.gserviceaccount.com',
   args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev', '--include-email']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['auth', 'print-identity-token', '--include-email', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev', '--token-format=full']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['auth', 'print-identity-token', '204799038523@cloudbuild.gserviceaccount.com', '--include-email', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
 
 
+--include-email --token-format=full
 #- name: gcr.io/cloud-builders/gcloud
 #  entrypoint: "bash"
 #  args:
