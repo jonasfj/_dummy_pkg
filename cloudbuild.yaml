@@ -5,6 +5,17 @@ steps:
   args: ['find']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['auth', 'list']
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: /bin/bash
+  args:
+    - '-c'
+    - |
+        # Create a id_token and store in a file for use in next step
+        gcloud auth print-identity-token \
+          --quiet \
+          --audiences="https://pub.dev" \
+          --include-email \
+          --format='value(id_token)'
 #- name: 'gcr.io/cloud-builders/gcloud'
 #  args: ['auth', 'print-identity-token', 'pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
 - name: 'gcr.io/cloud-builders/gcloud'
