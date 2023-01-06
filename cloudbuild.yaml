@@ -1,5 +1,6 @@
 steps:
-- name: gcr.io/cloud-builders/gcloud
+- id: Create temporary token
+  name: gcr.io/cloud-builders/gcloud
   volumes:
   - name: temporary-secrets
     path: /secrets
@@ -8,8 +9,8 @@ steps:
       --impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com \
       --audiences=https://pub.dev \
       --include-email > /secrets/temporary-pub-token.txt
-- name: dart
-  id: 'publish to pub.dev'
+- id: Publish to pub.dev
+  name: dart
   volumes:
   - name: temporary-secrets
     path: /secrets
