@@ -14,7 +14,6 @@ steps:
         gcloud auth print-identity-token \
           --quiet \
           --audiences="https://pub.dev" \
-          --include-email \
           --format='value(id_token)'
 #- name: 'gcr.io/cloud-builders/gcloud'
 #  args: ['auth', 'print-identity-token', 'pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
