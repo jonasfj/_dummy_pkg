@@ -1,21 +1,17 @@
 steps:
-- name: ubuntu
+- name: gcr.io/cloud-builders/gcloud
+  volumes:
+  - name: temporary-secrets
+    path: /secrets
   script: |
-    echo "pwd:"
-    pwd
-    echo "whoami:"
-    whoami
-    echo "ls:"
-    ls
-    echo "files:"
-    find
-    echo "cd /"
-    cd /
-    ls
-    echo "cd /workspace"
-    cd /workspace
-    ls
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev', '--include-email']
-
-
+    gcloud auth print-identity-token \
+      --impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com \
+      --audiences=https://pub.dev \
+      --include-email > /secrets/temporary-pub-token.txt
+- name: dart
+  volumes:
+  - name: temporary-secrets
+    path: /secrets
+  script: |
+    cat /secrets/temporary-pub-token.txt | dart pub token add https://pub.dev
+    dart pub publish
