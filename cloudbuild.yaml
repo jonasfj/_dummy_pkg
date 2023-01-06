@@ -2,6 +2,6 @@ steps:
 - name: 'ubuntu'
   args: ['echo', 'hello world']
 - name: 'ubuntu'
-  args: ['tree']
+  args: ['find']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['auth', 'print-identity-token', '--audiences=https://pub.dev', '--include-email']
