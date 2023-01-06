@@ -4,4 +4,8 @@ steps:
 - name: 'ubuntu'
   args: ['find']
 - name: 'gcr.io/cloud-builders/gcloud'
+  args: ['auth', 'list']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['auth', 'print-identity-token', '--audiences=https://pub.dev']
+- name: 'gcr.io/coud-builders/gcloud'
   args: ['auth', 'print-identity-token', '--audiences=https://pub.dev', '--include-email']
