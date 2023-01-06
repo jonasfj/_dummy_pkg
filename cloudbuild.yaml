@@ -5,10 +5,5 @@ steps:
   args: ['find']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['auth', 'list']
-#- name: 'gcr.io/cloud-builders/gcloud'
-#  args: ['auth', 'print-identity-token', 'pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
 - name: 'gcr.io/cloud-builders/gcloud'
-  #args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
-  args: ['auth', 'print-identity-token', 'pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
-- name: 'gcr.io/coud-builders/gcloud'
-  args: ['auth', 'print-identity-token', '--audiences=https://pub.dev', '--include-email']
+  args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
