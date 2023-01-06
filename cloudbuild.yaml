@@ -9,9 +9,10 @@ steps:
       --audiences=https://pub.dev \
       --include-email > /secrets/temporary-pub-token.txt
 - name: dart
+  id: 'publish to pub.dev'
   volumes:
   - name: temporary-secrets
     path: /secrets
   script: |
     cat /secrets/temporary-pub-token.txt | dart pub token add https://pub.dev
-    dart pub publish
+    dart pub publish --force
