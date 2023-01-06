@@ -1,32 +1,21 @@
 steps:
-- name: 'ubuntu'
-  args: ['echo', 'hello world']
-- name: 'ubuntu'
-  args: ['find']
+- name: ubuntu
+  script: |
+    echo "pwd:"
+    pwd
+    echo "whoami:"
+    whoami
+    echo "ls:"
+    ls
+    echo "files:"
+    find
+    echo "cd /"
+    cd /
+    ls
+    echo "cd /workspace"
+    cd /workspace
+    ls
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['auth', 'list']
-- name: 'gcr.io/cloud-builders/gcloud'
-  # '204799038523@cloudbuild.gserviceaccount.com',
   args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev', '--include-email']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['auth', 'print-identity-token', '--include-email', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev', '--token-format=full']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['auth', 'print-identity-token', '204799038523@cloudbuild.gserviceaccount.com', '--include-email', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
 
 
-# --include-email --token-format=full
-
-#- name: gcr.io/cloud-builders/gcloud
-#  entrypoint: "bash"
-#  args:
-#  - "-c"
-#  - |
-#      curl -X POST -H "content-type: application/json" \
-#      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-#      -d '{"audience": "https://pub.dev"}' \
-#        "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com:generateIdToken"
-#      # Use Cloud Build Service Account
-#      # service_account_email=$(gcloud config get-value account) 
-#
-#- name: 'gcr.io/cloud-builders/gcloud'
-#  args: ['auth', 'print-identity-token', '204799038523@cloudbuild.gserviceaccount.com', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
