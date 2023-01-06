@@ -6,4 +6,4 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['auth', 'list']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['auth', 'print-identity-token', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
+  args: ['auth', 'print-identity-token', '204799038523@cloudbuild.gserviceaccount.com', '--impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com', '--audiences=https://pub.dev']
