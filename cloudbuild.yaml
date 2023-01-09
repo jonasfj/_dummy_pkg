@@ -6,7 +6,7 @@ steps:
     path: /secrets
   script: |
     gcloud auth print-identity-token \
-      --impersonate-service-account=pub-dev@$PROJECT_ID.iam.gserviceaccount.com \
+      --impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com \
       --audiences=https://pub.dev \
       --include-email > /secrets/temporary-pub-token.txt
 - id: Publish to pub.dev
@@ -14,6 +14,6 @@ steps:
   volumes:
   - name: temporary-secrets
     path: /secrets
-  script: |
+  script: | 
     cat /secrets/temporary-pub-token.txt | dart pub token add https://pub.dev
     dart pub publish --force
