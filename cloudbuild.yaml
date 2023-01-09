@@ -6,9 +6,11 @@ steps:
     path: /secrets
   script: |
     gcloud auth print-identity-token \
-      --impersonate-service-account=pub-dev@jonasfj-dart-testing.iam.gserviceaccount.com \
+      --impersonate-service-account=pub-dev@$PROJECT_ID.iam.gserviceaccount.com \
       --audiences=https://pub.dev \
       --include-email > /secrets/temporary-pub-token.txt
+  env:
+  - PROJECT_ID=$PROJECT_ID
 - id: Publish to pub.dev
   name: dart
   volumes:
