@@ -25,20 +25,23 @@ on:
 #      working-directory: example
 
 jobs:
-  findPackage:
+  find-package:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_REF: ${{github.ref_name}}
-    outputs:
-      package: ${{steps.cut.outputs.package}}
     steps:
-    - id: cut
-      run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
+    - id: sed
+      run: echo "$GITHUB_REF" | sed 's#refs/tags/\([^-]*\)-.*#package=\1#' >> "$GITHUB_OUTPUT"
+    outputs:
+      package: ${{steps.sed.outputs.package}}
   publish:
-    needs: findPackage
+    needs: find-package
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
-      working-directory: ${{needs.findPackage.outputs.package}}
+      working-directory: ${{needs.find-package.outputs.package}}
+
+
+
+
+
 #  publish:
 #    permissions:
 #      id-token: write # This is required for requesting the JWT
