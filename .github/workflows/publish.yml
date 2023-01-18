@@ -3,7 +3,7 @@ name: Publish to pub.dev
 on:
   push:
     tags:
-      - *-v*
+      - [a-z_]+-v*
 
 jobs:
   find-package:
