@@ -12,45 +12,45 @@ on:
 
 
 
-jobs:
-  publish-example:
-    if: ${{ startsWith(github.ref_name, 'lib-') }}
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with:
-      working-directory: lib
-  publish-lib:
-    if: ${{ startsWith(github.ref_name, 'example-') }}
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with:
-      working-directory: example
-
 #jobs:
-#  findPackage:
-#    runs-on: ubuntu-latest
-#    env:
-#      GITHUB_REF: ${{github.ref_name}}
-#    outputs:
-#      package: ${{steps.cut.outputs.package}}
-#    steps:
-#    - id: cut
-#      run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
-#  publish:
-#    needs: findPackage
+#  publish-lib:
+#    if: ${{ startsWith(github.ref_name, 'lib-') }}
 #    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
 #    with:
-#      working-directory: ${{needs.findPackage.outputs.package}}
-#  publish:
-#    permissions:
-#      id-token: write # This is required for requesting the JWT
-#    runs-on: ubuntu-latest
-#    environment: pub.dev
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: isoos/setup-dart@oidc-token
-#      - name: Install dependencies
-#        run: dart pub get
-#      - name: Analyze
-#        run: dart analyze
-#      - name: Publish
-#        run: dart pub publish -f
+#      working-directory: lib
+#  publish-example:
+#    if: ${{ startsWith(github.ref_name, 'example-') }}
+#    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+#    with:
+#      working-directory: example
+
+jobs:
+  findPackage:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_REF: ${{github.ref_name}}
+    outputs:
+      package: ${{steps.cut.outputs.package}}
+    steps:
+    - id: cut
+      run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
+  publish:
+    needs: findPackage
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      working-directory: ${{needs.findPackage.outputs.package}}
+  publish:
+    permissions:
+      id-token: write # This is required for requesting the JWT
+    runs-on: ubuntu-latest
+    environment: pub.dev
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isoos/setup-dart@oidc-token
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze
+        run: dart analyze
+      - name: Publish
+        run: dart pub publish -f
 #
