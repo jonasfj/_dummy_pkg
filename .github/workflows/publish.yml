@@ -6,20 +6,32 @@ on:
       - '[a-z]+-v*'
 
 jobs:
-  findPackage:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_REF: ${{github.ref_name}}
-    outputs:
-      package: ${{steps.cut.outputs.package}}
-    steps:
-    - id: cut
-      run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
-  publish:
-    needs: findPackage
+   publish-example:
+    if: ${{ startsWith(github.ref_name, 'lib-') }}
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
-      working-folder: ${{needs.findPackage.outputs.package}}
+      working-folder: lib
+  publish-lib:
+    if: ${{ startsWith(github.ref_name, 'example-') }}
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      working-folder: example
+
+#jobs:
+#  findPackage:
+#    runs-on: ubuntu-latest
+#    env:
+#      GITHUB_REF: ${{github.ref_name}}
+#    outputs:
+#      package: ${{steps.cut.outputs.package}}
+#    steps:
+#    - id: cut
+#      run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
+#  publish:
+#    needs: findPackage
+#    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+#    with:
+#      working-folder: ${{needs.findPackage.outputs.package}}
 #  publish:
 #    permissions:
 #      id-token: write # This is required for requesting the JWT
