@@ -16,6 +16,7 @@ jobs:
     - id: cut
       run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
   publish:
+    needs: find-package
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       working-folder: ${{jobs.find-package.outputs.package}}
