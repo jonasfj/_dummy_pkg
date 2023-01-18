@@ -6,7 +6,7 @@ on:
       - '[a-z]+-v*'
 
 jobs:
-   publish-example:
+  publish-example:
     if: ${{ startsWith(github.ref_name, 'lib-') }}
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
