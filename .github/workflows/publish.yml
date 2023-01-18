@@ -6,7 +6,7 @@ on:
       - '[a-z]+-v*'
 
 jobs:
-  find-package:
+  findPackage:
     runs-on: ubuntu-latest
     env:
       GITHUB_REF: ${{github.ref_name}}
@@ -16,10 +16,10 @@ jobs:
     - id: cut
       run: echo "package=$(echo "$GITHUB_REF" | cut -d- -f1)" >> "$GITHUB_OUTPUT"
   publish:
-    needs: find-package
+    needs: findPackage
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
-      working-folder: ${{needs.find-package.outputs.package}}
+      working-folder: ${{needs.findPackage.outputs.package}}
 #  publish:
 #    permissions:
 #      id-token: write # This is required for requesting the JWT
