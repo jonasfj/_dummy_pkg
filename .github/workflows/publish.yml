@@ -45,7 +45,9 @@ jobs:
     - run: dart pub global run pana . >> "$GITHUB_STEP_SUMMARY"
       working-directory: ${{needs.find-package.outputs.package}}
   publish:
-    needs: find-package
+    needs:
+    - find-package
+    - pana
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
