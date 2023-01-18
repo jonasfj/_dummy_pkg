@@ -32,7 +32,7 @@ jobs:
       run: |
         PACKAGE=$(echo "$GITHUB_REF" | sed 's#refs/tags/\([^-]*\)-.*#\1#')
         echo "package=$PACKAGE">> "$GITHUB_OUTPUT"
-        echo "Prepare to publish \`$PACKAGE`" >> $GITHUB_STEP_SUMMARY
+        echo "Prepare to publish \`$PACKAGE\`" >> $GITHUB_STEP_SUMMARY
     outputs:
       package: ${{steps.sed.outputs.package}}
   publish:
