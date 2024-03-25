@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: isoos/setup-dart@oidc-token
+      - uses: dart-lang/setup-dart
       - name: Install dependencies
         run: dart pub get
       - name: Analyze
