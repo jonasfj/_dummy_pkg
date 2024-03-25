@@ -5,4 +5,4 @@ description: 'Dummy packages published from pub integration tests.'
 dependencies:
   retry: ^3.0.0
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ^3.0.0
