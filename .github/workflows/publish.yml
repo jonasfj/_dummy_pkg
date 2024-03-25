@@ -35,6 +35,8 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Publish
+        env:
+          PUB_HOSTED_URL: https://20240325t103500-dot-dartlang-pub.appspot.com
         run: dart pub publish -f
 
 
