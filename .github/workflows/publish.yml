@@ -25,12 +25,10 @@ on:
 #      working-directory: example
 
 jobs:
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+  publish:
     permissions:
       id-token: write 
-    with:
-      environment: pub.dev
-
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
 
 
 
