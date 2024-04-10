@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - name: Install dependencies
-        run: dart pub get
+        run: dart pub get -v
       - run: dart pub token add https://20240325t103500-dot-dartlang-pub.appspot.com --env-var PUB_TOKEN
       - name: Publish
         env:
