@@ -19,7 +19,7 @@ jobs:
       - name: create artifact
         run: |
           mkdir -p screenshots/
-          curl -L 'https://pub.dev/static/hash-v0koh7hq/img/landing-01.webp' -O screenshots/landing.webp
+          curl -O screenshots/landing.webp -L 'https://pub.dev/static/hash-v0koh7hq/img/landing-01.webp'
       - uses: actions/upload-artifact@v4
         with:
           name: landing.webp
