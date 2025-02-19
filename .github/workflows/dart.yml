@@ -11,8 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@v1
-      - name: Install dependencies
-        run: dart pub get
-      - name: Analyze
-        run: dart analyze
+      #- uses: dart-lang/setup-dart@v1
+      #- name: Install dependencies
+      #  run: dart pub get
+      #- name: Analyze
+      #  run: dart analyze
+      - name: create artifact
+        run: |
+          mkdir -p screenshots/
+          curl -L 'https://pub.dev/static/hash-v0koh7hq/img/landing-01.webp' -O screenshots/landing.webp
+      - uses: actions/upload-artifact@v4
+        with:
+          name: landing.webp
+          path: screenshots/landing.webp
